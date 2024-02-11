@@ -1,10 +1,17 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "B2G Service Map";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container width__max">
+    <div id="context-menu">
+        <div id="todo-mi" class="item">TODO</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 push--bottom">
+            <div class="first__upper pull-right"><strong><span id="updatedTime"></span></strong></div>
+        </div>
+    </div>
+    <div class="row" id="panelWrapper"></div>
 </div>

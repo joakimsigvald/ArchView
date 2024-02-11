@@ -1,4 +1,33 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿dashboard = function () {
+    function panelFactory(architecture) {
+        var panelContainer = $('#panelWrapper');
+        panelContainer.empty();
+    }
+    function getArchitecture() {
+        var serviceUrl = '/api/architecture';
 
-// Write your JavaScript code.
+        $.ajax({
+            url: serviceUrl,
+            type: "GET",
+            dataType: 'json',
+            success: function (architecture, status, xhr) {
+                panelFactory(architecture);
+                $('#updatedTime').html(moment().locale('sv').format('dddd D MMMM YYYY HH:mm:ss'));
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    return {
+        init: function () {
+            getArchitecture();
+
+            window.setInterval(function () {
+                getArchitecture();
+            }, 300000);
+        }
+    };
+};
+$(dashboard().init);
